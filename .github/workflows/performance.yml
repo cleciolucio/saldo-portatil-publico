@@ -1,0 +1,36 @@
+name: Performance e Kubernetes QA
+on:
+  workflow_dispatch:
+    inputs:
+      cluster:
+        description: Criar Kind e testar o serviço no Kubernetes
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run qa:tools:setup
+      - run: npm run build:qa
+      - run: npm run qa:k6:smoke && npm run qa:k6:load && npm run qa:k6:browser && npm run qa:k6:mobile
+      - run: npm run qa:cluster:validate
+      - if: inputs.cluster
+        run: npm run qa:cluster:create && npm run qa:cluster:deploy
+      - if: inputs.cluster
+        run: npm run qa:cluster:integration && npm run qa:cluster:k6 && npm run qa:cluster:collect
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-kubernetes-reports
+          path: reports/
+          retention-days: 7

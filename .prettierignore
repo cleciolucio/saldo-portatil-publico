@@ -1,0 +1,8 @@
+web/src/utilities.css
+/index.html
+package-lock.json
+android/
+ios/
+dist/
+reports/
+node_modules/

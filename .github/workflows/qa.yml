@@ -1,0 +1,33 @@
+name: QA Web e BDD
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: qa-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run docs:check
+      - run: npm run format:check
+      - run: npm run qa:check
+      - run: npm run qa:bdd:mobile-web
+      - run: npm run qa:bdd:iphone-web
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-reports
+          path: reports/
+          retention-days: 7

@@ -1,0 +1,81 @@
+name: Build Mobile e QA nativo
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Plataforma
+        required: true
+        type: choice
+        options: [android, ios]
+      native_tests:
+        description: Executar em runner self-hosted com dispositivo preparado
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  android-build:
+    if: inputs.platform == 'android'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - run: npm run qa:mobile:sync
+      - run: chmod +x android/gradlew && npm run mobile:android:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saldo-android-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
+  ios-build:
+    if: inputs.platform == 'ios'
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: xcodebuild -version
+      - run: npm run qa:mobile:sync
+      - run: npm run mobile:ios:build
+      - run: ditto -c -k --sequesterRsrc --keepParent .tools/ios-build/Build/Products/Debug-iphonesimulator/App.app .tools/Saldo-iOS-simulator.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saldo-ios-simulator
+          path: .tools/Saldo-iOS-simulator.zip
+          retention-days: 7
+  native-tests:
+    if: inputs.native_tests
+    runs-on: ${{ fromJSON(inputs.platform == 'android' && '["self-hosted","saldo-android"]' || '["self-hosted","saldo-ios"]') }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run qa:mobile:sync
+      - run: npm run mobile:${{ inputs.platform }}:build
+      - run: npm run appium:drivers
+      - run: node tools/native-ci.mjs ${{ inputs.platform }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-qa-reports
+          path: reports/
+          retention-days: 7

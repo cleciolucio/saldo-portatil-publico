@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Saldo: desenvolvimento",
+      "type": "process",
+      "command": "node",
+      "args": ["tools/run.mjs", "dev"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Saldo: build",
+      "type": "process",
+      "command": "node",
+      "args": ["tools/run.mjs", "build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Saldo: QA completo",
+      "type": "process",
+      "command": "node",
+      "args": ["tools/run.mjs", "qa:check"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Saldo: Cucumber",
+      "type": "process",
+      "command": "node",
+      "args": ["tools/run.mjs", "qa:bdd"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Saldo: diagnóstico",
+      "type": "process",
+      "command": "node",
+      "args": ["tools/run.mjs", "doctor"],
+      "problemMatcher": []
+    }
+  ]
+}

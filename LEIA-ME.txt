@@ -1,0 +1,9 @@
+SALDO PORTÁTIL — EDIÇÃO PÚBLICA
+
+Todos os valores iniciais são fictícios e editáveis.
+Abra index.html em um navegador atual para usar offline.
+Use Limpar dados desta cópia para começar com lançamentos vazios e saldos zerados.
+Você pode editar transações, nomes e valores de investimentos, cartões e metas.
+Os dados ficam no navegador. Salve backup completo para transportar suas alterações.
+Não publique seus backups nem credenciais no GitHub.
+Para desenvolver e testar, consulte README.md e a pasta docs.

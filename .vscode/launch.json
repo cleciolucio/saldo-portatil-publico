@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Saldo: servidor web",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/run.mjs",
+      "args": ["dev"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

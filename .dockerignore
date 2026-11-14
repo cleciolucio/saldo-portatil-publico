@@ -1,0 +1,11 @@
+node_modules
+.git
+.tools
+.appium
+reports
+dist
+android
+ios
+index.html
+*.pdf
+*.json.bak

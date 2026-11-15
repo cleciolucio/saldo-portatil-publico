@@ -13,6 +13,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
   </head>
   <body>
+    <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
     <header class="border-b border-[#2a352d]">
       <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
         <a
@@ -32,7 +33,31 @@
         >
       </div>
     </header>
-    <main class="max-w-[1440px] mx-auto px-5 md:px-10 py-8 md:py-10">
+    <nav class="app-navigation" aria-label="Áreas do sistema">
+      <div class="navigation-inner">
+        <button
+          id="navigationToggle"
+          class="secondary navigation-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navigationLinks"
+        >
+          ☰ Menu <span id="navigationCurrent">Painel</span>
+        </button>
+        <div id="navigationLinks" class="navigation-links">
+          <a href="#overview" aria-current="location">Painel</a>
+          <a href="#newEntrySection">Lançamentos</a>
+          <a href="#historySection">Histórico</a>
+          <a href="#cardsSection">Cartões</a>
+          <a href="#investmentsSection">Investimentos</a>
+          <a href="#planningSection">Planejamento</a>
+          <a href="#comparisonSection">Comparativo</a>
+          <a href="#goalsSection">Metas</a>
+          <a href="#backupTools">Backups</a>
+        </div>
+      </div>
+    </nav>
+    <main id="mainContent" tabindex="-1" class="max-w-[1440px] mx-auto px-5 md:px-10 py-8 md:py-10">
       <section class="panel p-5 mb-6" aria-label="Demonstração pública">
         <h2 class="font-medium">Versão pública · exemplos editáveis</h2>
         <p class="muted text-sm mt-2">
@@ -43,7 +68,11 @@
           Limpar dados desta cópia
         </button>
       </section>
-      <div class="flex flex-wrap items-end justify-between gap-5 mb-7">
+      <div
+        id="overview"
+        tabindex="-1"
+        class="navigation-target flex flex-wrap items-end justify-between gap-5 mb-7"
+      >
         <div>
           <p class="text-[10px] tracking-[.22em] text-[#c2f570] mb-2 uppercase">
             Seu panorama financeiro
@@ -217,7 +246,12 @@
           </p>
         </article>
       </section>
-      <section class="panel p-5 md:p-6 mb-6" aria-labelledby="copyTitle">
+      <section
+        id="planningSection"
+        tabindex="-1"
+        class="navigation-target panel p-5 md:p-6 mb-6"
+        aria-labelledby="copyTitle"
+      >
         <h2 id="copyTitle">Preparar outro mês</h2>
         <p class="muted text-xs mt-2">
           Copia valores como previstos. Datas são ajustadas ao mês de destino. Faturas detalhadas
@@ -242,7 +276,12 @@
         </form>
         <p id="copyResult" class="muted text-xs mt-3" role="status"></p>
       </section>
-      <section class="panel p-5 md:p-6 mb-6" aria-labelledby="compareTitle">
+      <section
+        id="comparisonSection"
+        tabindex="-1"
+        class="navigation-target panel p-5 md:p-6 mb-6"
+        aria-labelledby="compareTitle"
+      >
         <h2 id="compareTitle">Comparativo mensal</h2>
         <p class="muted text-xs mt-2">
           Seis meses até o período selecionado. Valores previstos + realizados; saldo realizado em
@@ -275,7 +314,12 @@
           </table>
         </div>
       </section>
-      <section class="panel p-5 md:p-6 mb-6" aria-labelledby="investmentsTitle">
+      <section
+        id="investmentsSection"
+        tabindex="-1"
+        class="navigation-target panel p-5 md:p-6 mb-6"
+        aria-labelledby="investmentsTitle"
+      >
         <h2 id="investmentsTitle">Meus investimentos</h2>
         <p class="muted text-xs mt-2">
           Posição geral informada por você, independente do mês selecionado. Estes saldos não entram
@@ -290,7 +334,12 @@
           Nenhuma posição de investimentos neste backup.
         </p>
       </section>
-      <section class="panel p-5 md:p-6 mb-6" aria-labelledby="goalTitle">
+      <section
+        id="goalsSection"
+        tabindex="-1"
+        class="navigation-target panel p-5 md:p-6 mb-6"
+        aria-labelledby="goalTitle"
+      >
         <h2 id="goalTitle">Meta de economia do mês</h2>
         <p class="muted text-xs mt-2">
           Acompanhe o valor reservado por você. A reserva não cria despesa nem altera seu saldo.
@@ -315,7 +364,12 @@
         ></progress>
         <p id="goalSummary" class="text-sm mt-3"></p>
       </section>
-      <section class="panel p-5 md:p-6 mb-6" aria-labelledby="cardsTitle">
+      <section
+        id="cardsSection"
+        tabindex="-1"
+        class="navigation-target panel p-5 md:p-6 mb-6"
+        aria-labelledby="cardsTitle"
+      >
         <h2 id="cardsTitle">Cartões e compras parceladas</h2>
         <p class="muted text-xs mt-2">
           As compras detalham as faturas. Somente a fatura entra nas despesas do mês de vencimento.
@@ -377,7 +431,12 @@
         <h3 class="mt-6">Compras cadastradas (todos os meses)</h3>
         <div id="purchaseList" class="mt-3 space-y-3"></div>
       </section>
-      <section class="panel p-5 md:p-6 mb-6" aria-labelledby="newTitle">
+      <section
+        id="newEntrySection"
+        tabindex="-1"
+        class="navigation-target panel p-5 md:p-6 mb-6"
+        aria-labelledby="newTitle"
+      >
         <div class="flex items-center gap-3 mb-5">
           <span
             class="rounded-lg border border-[#3e5034] text-[#c2f570] w-8 h-8 flex items-center justify-center"
@@ -436,13 +495,24 @@
           </div>
         </form>
       </section>
-      <section class="panel overflow-hidden" aria-labelledby="historyTitle">
+      <section
+        id="historySection"
+        tabindex="-1"
+        class="navigation-target panel overflow-hidden"
+        aria-labelledby="historyTitle"
+      >
         <div class="p-5 md:p-6 flex flex-wrap justify-between items-center gap-4">
           <div>
             <h2 id="historyTitle" class="font-medium">Histórico de transações</h2>
             <p id="count" class="muted text-xs mt-1"></p>
           </div>
-          <div class="flex flex-wrap gap-3">
+          <div
+            id="backupTools"
+            tabindex="-1"
+            class="navigation-target flex flex-wrap gap-3"
+            role="group"
+            aria-label="Salvar e restaurar backups"
+          >
             <button id="downloadBackup" type="button" class="secondary text-xs">
               Salvar backup completo</button
             ><button id="restoreBackup" type="button" class="secondary text-xs">

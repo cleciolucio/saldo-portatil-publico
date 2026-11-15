@@ -1,6 +1,7 @@
 import './utilities.css';
 import './styles.css';
 import './app.js';
+import './navigation.js';
 import { Capacitor } from '@capacitor/core';
 if (
   import.meta.env.PROD &&

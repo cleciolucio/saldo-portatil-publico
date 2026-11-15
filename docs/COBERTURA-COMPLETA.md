@@ -1,6 +1,6 @@
 # Cobertura funcional completa dos módulos atuais
 
-A bateria contém **55 cenários E2E, executados nos cinco projetos (275 execuções)**.
+A bateria contém **58 cenários E2E, executados nos cinco projetos (290 execuções)**.
 Esta é cobertura dos fluxos catalogados abaixo; não significa provar todos os
 estados possíveis do programa nem substitui exploração em aparelhos reais.
 As implementações estão em `tests/e2e/`, com helpers e fixtures compartilhados.
@@ -49,3 +49,9 @@ A suíte Appium mantém três cenários smoke de instalação/WebView, persistê
 reinício e privacidade, com PNG/MP4 quando executados. A matriz em viewport mobile
 não equivale a executar os 51 cenários em aparelhos Android/iOS. Os testes de arquivo
 nativo e comportamento do sistema continuam dependentes de dispositivo/macOS.
+
+## Navegação entre módulos
+
+`NAV-01` a `NAV-03` verificam os atalhos sem alteração de mês ou dados, foco e
+identificação da área selecionada, menu compacto por teclado/Escape, ausência
+de rolagem horizontal, links diretos e voltar/avançar do navegador.

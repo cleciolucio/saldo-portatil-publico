@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+const chromiumChannel = process.env.PLAYWRIGHT_USE_CHROME === '1' ? 'chrome' : 'chromium';
+const chromiumProjectName = process.env.PLAYWRIGHT_USE_CHROME === '1' ? 'chrome' : 'chromium';
 export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
@@ -29,7 +31,7 @@ export default defineConfig({
         timeout: 30000,
       },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'], channel: 'chromium' } },
+    { name: chromiumProjectName, use: { ...devices['Desktop Chrome'], channel: chromiumChannel } },
     { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
     { name: 'webkit', use: { ...devices['Desktop Safari'] } },
     { name: 'android-web', use: { ...devices['Pixel 7'], channel: 'chromium' } },

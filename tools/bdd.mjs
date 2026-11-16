@@ -9,7 +9,7 @@ if (!['web', 'mobile-web', 'iphone-web', 'android', 'ios'].includes(mode))
 if (mode === 'ios' && process.platform !== 'darwin')
   throw new Error('Appium iOS precisa ser executado em macOS com Xcode.');
 mkdirSync('reports/cucumber', { recursive: true });
-const env = { ...process.env, BDD_REPORT_NAME: mode };
+const env = { ...process.env, BDD_REPORT_NAME: process.env.BDD_REPORT_NAME || mode };
 if (mode === 'mobile-web') env.BDD_DEVICE = 'android';
 if (mode === 'iphone-web') {
   env.BDD_DEVICE = 'ios';

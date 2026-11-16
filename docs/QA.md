@@ -105,6 +105,44 @@ Não rode vários runners na mesma porta ao mesmo tempo; Playwright reutiliza um
 servidor existente fora do CI, portanto confirme que ele pertence a esta cópia do
 projeto. Use filtros de tag sempre entre aspas no PowerShell.
 
+Para usar o Google Chrome instalado, em vez do Chromium distribuído pelo Playwright,
+selecione o canal `chrome`:
+
+```powershell
+$env:PLAYWRIGHT_USE_CHROME = '1'
+.\saldo.cmd qa:web:headed -- --project=chrome
+Remove-Item Env:PLAYWRIGHT_USE_CHROME
+
+$env:HEADED = '1'
+$env:BDD_BROWSER = 'chromium'
+$env:BDD_BROWSER_CHANNEL = 'chrome'
+$env:BDD_REPORT_NAME = 'web-chrome'
+.\saldo.cmd qa:bdd
+Remove-Item Env:HEADED, Env:BDD_BROWSER, Env:BDD_BROWSER_CHANNEL, Env:BDD_REPORT_NAME
+```
+
+Com `PLAYWRIGHT_USE_CHROME=1`, o projeto e o relatório aparecem como `chrome` e
+usam o Google Chrome instalado no sistema.
+
+Para executar todas as features BDD em cada navegador visível e manter relatórios
+e mídias separados por navegador:
+
+```powershell
+$env:HEADED = '1'
+foreach ($browser in @('chromium', 'firefox', 'webkit')) {
+  $env:BDD_BROWSER = $browser
+  $env:BDD_REPORT_NAME = "web-$browser"
+  .\saldo.cmd qa:bdd
+  if ($LASTEXITCODE -ne 0) { break }
+}
+Remove-Item Env:HEADED, Env:BDD_BROWSER, Env:BDD_REPORT_NAME -ErrorAction SilentlyContinue
+```
+
+Os relatórios ficam em `reports/cucumber/web-<navegador>.html`; screenshots,
+vídeos e traces ficam em `reports/cucumber/media/` com prefixo do navegador.
+O dashboard de screenshots e vídeos da suíte Playwright fica em
+`reports/evidence/index.html`.
+
 ### 5. Executar testes nativos (somente quando solicitado)
 
 Android nativo precisa de JDK 21+, Android SDK API 36+, aparelho/AVD autorizado,

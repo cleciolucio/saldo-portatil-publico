@@ -20,8 +20,8 @@ android {
         debug {
             applicationIdSuffix ".qa"
             versionNameSuffix "-qa"
-            resValue "string", "app_name", "Saldo QA"
-            resValue "string", "title_activity_main", "Saldo QA"
+            resValue "string", "app_name", "MeuSaldo.com QA"
+            resValue "string", "title_activity_main", "MeuSaldo.com QA"
         }
         release {
             minifyEnabled false

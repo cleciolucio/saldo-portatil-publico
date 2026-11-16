@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Saldo: servidor web",
+      "name": "MeuSaldo.com: servidor web",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/tools/run.mjs",

@@ -1,4 +1,4 @@
-# Saldo Portátil
+# MeuSaldo.com
 
 Controle financeiro offline, gratuito e personalizável para **Web, Android e iOS**,
 com testes automatizados em Playwright, Cucumber, Appium e k6.

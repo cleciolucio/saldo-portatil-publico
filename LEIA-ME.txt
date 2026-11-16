@@ -1,4 +1,4 @@
-SALDO PORTÁTIL — EDIÇÃO PÚBLICA
+MeuSaldo.com — EDIÇÃO PÚBLICA
 
 Todos os valores iniciais são fictícios e editáveis.
 Abra index.html em um navegador atual para usar offline.

@@ -2,35 +2,35 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Saldo: desenvolvimento",
+      "label": "MeuSaldo.com: desenvolvimento",
       "type": "process",
       "command": "node",
       "args": ["tools/run.mjs", "dev"],
       "problemMatcher": []
     },
     {
-      "label": "Saldo: build",
+      "label": "MeuSaldo.com: build",
       "type": "process",
       "command": "node",
       "args": ["tools/run.mjs", "build"],
       "problemMatcher": []
     },
     {
-      "label": "Saldo: QA completo",
+      "label": "MeuSaldo.com: QA completo",
       "type": "process",
       "command": "node",
       "args": ["tools/run.mjs", "qa:check"],
       "problemMatcher": []
     },
     {
-      "label": "Saldo: Cucumber",
+      "label": "MeuSaldo.com: Cucumber",
       "type": "process",
       "command": "node",
       "args": ["tools/run.mjs", "qa:bdd"],
       "problemMatcher": []
     },
     {
-      "label": "Saldo: diagnóstico",
+      "label": "MeuSaldo.com: diagnóstico",
       "type": "process",
       "command": "node",
       "args": ["tools/run.mjs", "doctor"],
